@@ -1,6 +1,8 @@
 ---
 title: "rnaseq"
-output: html_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -9,17 +11,87 @@ output: html_document
 
 ```{r}
 # Librerias necesarias para gráficar
-install.packages("RColorBrewer")
-install.packages("gplots")
-install.packages("ggplot2")
+#install.packages("RColorBrewer")
+#install.packages("gplots")
+#install.packages("ggplot2")
 ```
 ```{r}
 # https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4302049/pdf/13059_2014_Article_550.pdf
-if (!requireNamespace("BiocManager", quietly = TRUE))
-	install.packages("BiocManager")
+#if (!requireNamespace("BiocManager", quietly = TRUE))
+	#install.packages("BiocManager")
 
-BiocManager::install("biomaRt")
-BiocManager::install("DESeq2")
+#BiocManager::install("biomaRt")
+#BiocManager::install("DESeq2")
 ```
+```{r}
+#Cargaremos todos los paquetes que utilizaremos en el práctico
+#library("DESeq2")
+#library("data.table")
+```
+#Preparando para el Cálculo de Expresión Diferencial
+
+Establecemos una ubicación donde trabajaremos, esta por conveniencia será la carpeta que definimos anteriormente
+```{r}
+carpeta = "/Users/alonso/Documents/GitHub/rnaseq/"
+setwd(carpeta)
+```
+
+Definiremos un prefijo que le pondremos a todos nuestros archivos de salida del análisis
+```{r}
+outputPrefix = "practico_rnaseq_de"
+```
+
+Ahora cargaremos los archivos que estan alojados en la variable carpeta
+```{r}
+sampleFiles = c("SRR358994trimmedAligned.sortedByCoord.out.bam.htseq.out",
+                "SRR358995_trimmedAligned.sortedByCoord.out.bam.htseq.out",
+                "SRR358996_trimmedAligned.sortedByCoord.out.bam.htseq.out",
+                "SRR358997_trimmedAligned.sortedByCoord.out.bam.htseq.out",
+                "SRR358998_trimmedAligned.sortedByCoord.out.bam.htseq.out",
+                "SRR358999_trimmedAligned.sortedByCoord.out.bam.htseq.out")
+```
+
+Ahora estableceremos un nombre para cada muestra, lo sacaremos del archivo
+descargado desde `GXA` (https://www.ebi.ac.uk/gxa/home).
+
+En este caso he optado por asignar el nombre utilizando Tejido, Número de Paciente y fenotipo quedando de la siguiente manera: Tejido_NumeroPaciente_fenotipo es muy importante que el nombre que pongamos acá este en perfecta relación con el nombre de los archivos de arriba, esto hay que revisarlo en la sección `Experiment Design` (ebi.ac.uk/gxa/experiments/E-GEOD-33294/Experiment%20Design) o en la tabla `experiment_design`.
+
+```{r}
+sampleNames = c("liver_448_adjacent_non-tumor_tissue",
+                 "liver_448_tumor",
+                 "liver_473_adjacent_non-tumor_tissue",
+                 "liver_473_tumor",
+                 "liver_510_adjacent_non-tumor_tissue",
+                 "liver_510_tumor")
+```
+
+Ahora estableceremos las condiciones de cada muestra
+```{r}
+sampleCondition = c("non-tumor",
+                     "tumor",
+                     "non-tumor",
+                     "tumor",
+                     "non-tumor",
+                     "tumor")
+```
+
+Agregaremos toda esta info a un Data Frame (Tabla)
+```{r}
+sampleTable = data.frame(sampleName = sampleNames, fileName = sampleFiles, condition = sampleCondition)
+```
+
+Estableceremos cuales son los tratamientos
+```{r}
+treatments = c("non-tumor","tumor")
+```
+
+#Expresión diferencial
+
+
+
+
+
+
+
 
 
