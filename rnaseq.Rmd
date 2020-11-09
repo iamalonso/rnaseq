@@ -1,0 +1,25 @@
+---
+title: "rnaseq"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#https://github.com/dtravisany/rnaseq
+```
+
+```{r}
+# Librerias necesarias para gráficar
+install.packages("RColorBrewer")
+install.packages("gplots")
+install.packages("ggplot2")
+```
+```{r}
+# https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4302049/pdf/13059_2014_Article_550.pdf
+if (!requireNamespace("BiocManager", quietly = TRUE))
+	install.packages("BiocManager")
+
+BiocManager::install("biomaRt")
+BiocManager::install("DESeq2")
+```
+
+
