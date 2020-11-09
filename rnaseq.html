@@ -1698,8 +1698,7 @@ summary {
 <pre class="r"><code>#Cargaremos todos los paquetes que utilizaremos en el práctico
 #library(&quot;DESeq2&quot;)
 #library(&quot;data.table&quot;)</code></pre>
-<div id="preparando-para-el-cálculo-de-expresión-diferencial" class="section level1">
-<h1>Preparando para el Cálculo de Expresión Diferencial</h1>
+<p>#Preparando para el Cálculo de Expresión Diferencial</p>
 <p>Establecemos una ubicación donde trabajaremos, esta por conveniencia será la carpeta que definimos anteriormente</p>
 <pre class="r"><code>carpeta = &quot;/Users/alonso/Documents/GitHub/rnaseq/&quot;
 setwd(carpeta)</code></pre>
@@ -1731,6 +1730,10 @@ setwd(carpeta)</code></pre>
 <pre class="r"><code>sampleTable = data.frame(sampleName = sampleNames, fileName = sampleFiles, condition = sampleCondition)</code></pre>
 <p>Estableceremos cuales son los tratamientos</p>
 <pre class="r"><code>treatments = c(&quot;non-tumor&quot;,&quot;tumor&quot;)</code></pre>
+<div id="expresión-diferencial" class="section level1">
+<h1>Expresión diferencial</h1>
+<p>Como utilizamos htseq para realizar los conteos, podremos acceder a comandos especiales de DESeq2 para el tratamiento desde archivos de conteo provenientes de este software. Es útil ver el manual para esta <a href="http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#htseq-count-input">sección</a>.</p>
+<p>entregamos el dataframe, la carpeta que establecimos al principio y las condiciones que estan en la tabla como condition.</p>
 </div>
 
 
