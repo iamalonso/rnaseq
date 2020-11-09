@@ -85,9 +85,11 @@ Estableceremos cuales son los tratamientos
 treatments = c("non-tumor","tumor")
 ```
 
-#Expresión diferencial
+# Expresión diferencial
 
+Como utilizamos htseq para realizar los conteos, podremos acceder a comandos especiales de DESeq2 para el tratamiento desde archivos de conteo provenientes de este software. Es útil ver el manual para esta [sección](http://bioconductor.org/packages/release/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#htseq-count-input).
 
+entregamos el dataframe, la carpeta que establecimos al principio y las condiciones que estan en la tabla como condition.
 
 
 
