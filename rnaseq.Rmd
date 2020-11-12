@@ -25,13 +25,14 @@ output:
 ```
 ```{r}
 #Cargaremos todos los paquetes que utilizaremos en el práctico
-#library("DESeq2")
-#library("data.table")
+library("DESeq2")
+library("data.table")
 ```
 #Preparando para el Cálculo de Expresión Diferencial
 
 Establecemos una ubicación donde trabajaremos, esta por conveniencia será la carpeta que definimos anteriormente
 ```{r}
+# Acá se reemplaza por su carpeta personal
 carpeta = "/Users/alonso/Documents/GitHub/rnaseq/"
 setwd(carpeta)
 ```
@@ -43,7 +44,7 @@ outputPrefix = "practico_rnaseq_de"
 
 Ahora cargaremos los archivos que estan alojados en la variable carpeta
 ```{r}
-sampleFiles = c("SRR358994trimmedAligned.sortedByCoord.out.bam.htseq.out",
+sampleFiles = c("SRR358994_trimmedAligned.sortedByCoord.out.bam.htseq.out",
                 "SRR358995_trimmedAligned.sortedByCoord.out.bam.htseq.out",
                 "SRR358996_trimmedAligned.sortedByCoord.out.bam.htseq.out",
                 "SRR358997_trimmedAligned.sortedByCoord.out.bam.htseq.out",
