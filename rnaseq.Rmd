@@ -14,6 +14,7 @@ output:
 #install.packages("RColorBrewer")
 #install.packages("gplots")
 #install.packages("ggplot2")
+install.packages("data.table")
 ```
 ```{r}
 # https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4302049/pdf/13059_2014_Article_550.pdf
@@ -25,8 +26,8 @@ output:
 ```
 ```{r}
 #Cargaremos todos los paquetes que utilizaremos en el práctico
-#library("DESeq2")
-#library("data.table")
+library("DESeq2")
+library("data.table")
 ```
 #Preparando para el Cálculo de Expresión Diferencial
 
@@ -106,5 +107,23 @@ Ahora sacaremos los genes DE con un p-valor ajustado < 0.05 y ordenados de menor
 res = subset(res, padj<0.05)
 res = res[order(res$padj),]
 ```
+
+Guardaremos nuestros resultados en archivos CSV.
+```{r}
+resdata = merge(as.data.frame(res), as.data.frame(counts(dds,normalized =TRUE)), by = 'row.names', sort = FALSE)
+names(resdata)[1] = 'gene'
+write.csv(resdata,quote=FALSE, row.names=FALSE, file = paste0(outputPrefix, "-resultados-normalizados.csv"))
+
+# Conteos Normalizados compatibles con GSEA.
+table = as.data.frame(counts(dds),normalized=T)
+table2 = setDT(table,keep.rownames = TRUE)[]
+colnames(table2)[1] = "gene"
+
+write.table(table2, sep="\t" , quote=FALSE, row.names = FALSE,  file = paste0(outputPrefix, "_conteos_normalizados.txt"))
+```
+
+Ahora tendremos dos archivos, el primero es nuestra expresión diferencial (OUTPUTPREFIX-resultados-normalizados.csv).
+
+
 
 
