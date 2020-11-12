@@ -100,5 +100,11 @@ dds = DESeq(ddsHTSeq)
 res = results(dds)
 ```
 
+Ahora sacaremos los genes DE con un p-valor ajustado < 0.05 y ordenados de menor p-valor-ajustado a mayor p-valor-ajustado:
+
+```{r}
+res = subset(res, padj<0.05)
+res = res[order(res$padj),]
+```
 
 
