@@ -43,11 +43,9 @@ outputPrefix = "practico_rnaseq_de"
 
 Ahora cargaremos los archivos que estan alojados en la variable carpeta
 ```{r}
-sampleFiles = c("SRR358994trimmedAligned.sortedByCoord.out.bam.htseq.out",
-                "SRR358995_trimmedAligned.sortedByCoord.out.bam.htseq.out",
+sampleFiles = c("SRR358995_trimmedAligned.sortedByCoord.out.bam.htseq.out", 
                 "SRR358996_trimmedAligned.sortedByCoord.out.bam.htseq.out",
                 "SRR358997_trimmedAligned.sortedByCoord.out.bam.htseq.out",
-                "SRR358998_trimmedAligned.sortedByCoord.out.bam.htseq.out",
                 "SRR358999_trimmedAligned.sortedByCoord.out.bam.htseq.out")
 ```
 
@@ -57,22 +55,18 @@ descargado desde `GXA` (https://www.ebi.ac.uk/gxa/home).
 En este caso he optado por asignar el nombre utilizando Tejido, Número de Paciente y fenotipo quedando de la siguiente manera: Tejido_NumeroPaciente_fenotipo es muy importante que el nombre que pongamos acá este en perfecta relación con el nombre de los archivos de arriba, esto hay que revisarlo en la sección `Experiment Design` (ebi.ac.uk/gxa/experiments/E-GEOD-33294/Experiment%20Design) o en la tabla `experiment_design`.
 
 ```{r}
-sampleNames = c("liver_448_adjacent_non-tumor_tissue",
-                 "liver_448_tumor",
+sampleNames = c( "liver_448_tumor", 
                  "liver_473_adjacent_non-tumor_tissue",
                  "liver_473_tumor",
-                 "liver_510_adjacent_non-tumor_tissue",
-                 "liver_510_tumor")
+                 "liver_510_tumor" )
 ```
 
 Ahora estableceremos las condiciones de cada muestra
 ```{r}
-sampleCondition = c("non-tumor",
-                     "tumor",
+sampleCondition = c( "tumor",
                      "non-tumor",
                      "tumor",
-                     "non-tumor",
-                     "tumor")
+                     "tumor" )
 ```
 
 Agregaremos toda esta info a un Data Frame (Tabla)
@@ -91,10 +85,20 @@ Como utilizamos htseq para realizar los conteos, podremos acceder a comandos esp
 
 entregamos el dataframe, la carpeta que establecimos al principio y las condiciones que estan en la tabla como condition.
 
+```{r}
+ddsHTSeq = DESeqDataSetFromHTSeqCount(sampleTable = sampleTable,
+                                       directory = carpeta,
+                                       design = ~ condition)
+colData(ddsHTSeq)$condition = factor(colData(ddsHTSeq)$condition,
+                                      levels = treatments)
+```
+
+Ahora ejecutamos la expresión Diferencial:
+
+```{r}
+dds = DESeq(ddsHTSeq)
+res = results(dds)
+```
 
 
 
-
-
-
-cvbdfbdg
